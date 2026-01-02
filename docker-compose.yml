@@ -1,0 +1,35 @@
+services:
+  # Reverse Proxy avec interface Web pour gérer le SSL
+  nginx-proxy:
+    image: "jc21/nginx-proxy-manager:latest"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:81" # Interface de gestion
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    restart: always
+
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=OrientaCamDb
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  api:
+    build: ./EstmApi
+    restart: always
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=db;Database=OrientaCamDb;Username=postgres;Password=${DB_PASSWORD}
+
+  web:
+    build: ./estm-web
+    restart: always
+
+volumes:
+  postgres_data:

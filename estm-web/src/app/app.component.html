@@ -1,0 +1,51 @@
+<div class="app-layout">
+  <nav class="glass-nav">
+    <div class="nav-container">
+      <div class="brand">
+        <div class="logo-icon">🎓</div>
+        <div class="brand-text">
+          <span class="main-title">OrientaCam</span>
+          <span class="tagline">Portail National d'Orientation</span>
+        </div>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#" class="active">Découverte</a></li>
+        <li><a href="#">Universités</a></li>
+        <li><a href="#">Comparateur</a></li>
+        <li><a href="#">Aide</a></li>
+      </ul>
+
+      <button class="btn-contact">Nous contacter</button>
+
+      <button class="mobile-toggle" (click)="toggleMenu()">☰</button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <app-discovery></app-discovery>
+  </main>
+
+  <footer class="global-footer">
+    <div class="footer-grid">
+      <div class="footer-info">
+        <h3>OrientaCam</h3>
+        <p>
+          La plateforme unifiée pour trouver son métier et sa formation au
+          Cameroun.
+        </p>
+      </div>
+      <div class="footer-links">
+        <h4>Partenaires</h4>
+        <ul>
+          <li>ESTM - Batouri</li>
+          <li>Université de Yaoundé I</li>
+          <li>IAI-Cameroun</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 - Designé pour l'excellence académique</p>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,16 @@
+@EstmApi_HostAddress = http://localhost:5088
+
+### Récupérer tous les métiers et formations
+GET {{EstmApi_HostAddress}}/api/discovery/search
+
+### Rechercher uniquement les métiers d'ingénieur
+GET {{EstmApi_HostAddress}}/api/discovery/search?q=Ingénieur&type=0
+
+### Lister les institutions disponibles
+GET {{EstmApi_HostAddress}}/api/discovery/institutions
+
+Accept: application/json
+
+###
+
+

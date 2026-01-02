@@ -1,0 +1,84 @@
+<div class="container">
+  <header class="hero">
+    <h1>Explorez votre <span class="highlight">Avenir</span></h1>
+    <p>
+      Trouvez un métier passionnant ou la formation pour y parvenir, partout au
+      Cameroun.
+    </p>
+  </header>
+
+  <div class="mode-switcher glass">
+    <button
+      [class.active]="ds.selectedType() === 'Tout'"
+      (click)="setMode('Tout')"
+    >
+      Tout Voir
+    </button>
+    <button
+      [class.active]="ds.selectedType() === 'Métier'"
+      (click)="setMode('Métier')"
+    >
+      Par Métier
+    </button>
+    <button
+      [class.active]="ds.selectedType() === 'Formation'"
+      (click)="setMode('Formation')"
+    >
+      Par Formation
+    </button>
+  </div>
+
+  <div class="search-engine glass">
+    <div class="input-group">
+      <span class="icon">🔍</span>
+      <input
+        type="text"
+        [ngModel]="ds.searchQuery()"
+        (ngModelChange)="ds.searchQuery.set($event)"
+        placeholder="Rechercher une compétence, un titre..."
+      />
+    </div>
+
+    <div class="select-group">
+      <label>Université :</label>
+      <select
+        [ngModel]="ds.selectedInstitution()"
+        (ngModelChange)="ds.selectedInstitution.set($event)"
+      >
+        @for (inst of ds.getInstitutions(); track inst) {
+        <option [value]="inst">{{ inst }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <div class="results-grid">
+    @for (item of ds.filteredResults(); track item.id) {
+    <div class="card shadow-sm" [attr.data-type]="item.type">
+      <div class="card-badge">{{ item.type }}</div>
+
+      <div class="card-body">
+        <small class="domain">{{ item.domain }}</small>
+        <h3>{{ item.title }}</h3>
+        <p class="institution">🏛️ {{ item.institution }}</p>
+
+        <p class="desc">{{ item.description | slice : 0 : 100 }}...</p>
+
+        <div class="meta-info">
+          <span>📍 {{ item.location }}</span> : @if (item.fee) {
+          <span class="price">{{ item.fee }}</span> }
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <button class="btn-outline">Détails</button>
+        <button class="btn-primary">S'inscrire</button>
+      </div>
+    </div>
+    } @empty {
+    <div class="empty-state">
+      <p>Aucun résultat correspondant à votre recherche.</p>
+    </div>
+    }
+  </div>
+</div>
