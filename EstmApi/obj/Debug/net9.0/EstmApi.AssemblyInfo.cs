@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EstmApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abab04201b3ee662af0de36050a6bff788bb6209")]
 [assembly: System.Reflection.AssemblyProductAttribute("EstmApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EstmApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod()
               .AllowAnyHeader());
 });
-
+AppContext.SetSwitch("Npgsql.EnableIPv6", false);
 var app = builder.Build();
 
 app.UseCors("AngularApp");
