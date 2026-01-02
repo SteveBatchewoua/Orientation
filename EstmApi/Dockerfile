@@ -1,23 +1,26 @@
 # Étape de Build
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-WORKDIR /src
+WORKDIR /app
 
-# On copie le projet en spécifiant le chemin relatif
-# Si ton fichier s'appelle EstmApi.csproj
-COPY ["EstmApi.csproj", "./"]
-RUN dotnet restore "EstmApi.csproj"
-
-# Copier tout le reste du dossier EstmApi
+# On copie toute la solution/le contexte
+# Render envoie tout le repo, donc on accède au sous-dossier
 COPY . .
-RUN dotnet publish "EstmApi.csproj" -c Release -o /app/publish
 
-# Étape finale
+# On restaure en pointant explicitement vers le projet dans le sous-dossier
+# Note : Si ton projet est à la racine, enlève "EstmApi/"
+RUN dotnet restore "./EstmApi.csproj"
+
+# On publie
+RUN dotnet publish "./EstmApi.csproj" -c Release -o /out
+
+# Étape finale (Runtime)
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
-COPY --from=build /app/publish .
+COPY --from=build /out .
 
-# Important pour Render : l'API doit écouter sur le port que Render lui donne
+# Configuration pour Render
 ENV ASPNETCORE_URLS=http://+:8080
 EXPOSE 8080
 
+# Assure-toi que le nom de la DLL est correct (EstmApi.dll)
 ENTRYPOINT ["dotnet", "EstmApi.dll"]
