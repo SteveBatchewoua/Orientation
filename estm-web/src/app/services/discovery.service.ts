@@ -7,7 +7,9 @@ import { DiscoveryItem } from '../models/discovery.model';
 @Injectable({ providedIn: 'root' })
 export class DiscoveryService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5088/api/discovery';
+  private apiUrl =
+    'https://orientation-production.up.railway.app/api/discovery';
+  //private apiUrl = 'http://localhost:5088/api/discovery';
 
   searchQuery = signal('');
   selectedType = signal<string>('Tout');
