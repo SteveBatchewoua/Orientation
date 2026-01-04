@@ -3,13 +3,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { DiscoveryItem } from '../models/discovery.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class DiscoveryService {
   private http = inject(HttpClient);
-  private apiUrl =
-    'https://orientation-production.up.railway.app/api/discovery';
-  //private apiUrl = 'http://localhost:5088/api/discovery';
+  private apiUrl = environment.apiURL + '/discovery';
 
   searchQuery = signal('');
   selectedType = signal<string>('Tout');
