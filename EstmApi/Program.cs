@@ -13,7 +13,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AngularApp", policy =>
-        policy.WithOrigins("http://localhost:4200")
+        //policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins("https://orientation-ep1n.vercel.app")
+        
               .AllowAnyMethod()
               .AllowAnyHeader());
 });
